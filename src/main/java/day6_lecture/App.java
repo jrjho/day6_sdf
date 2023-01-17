@@ -80,6 +80,10 @@ public final class App {
         };
         System.out.println("minusOperation: " + minusOperation.process(29,45));
 
+        MyMessageInterface printString = (a) -> {
+            System.out.println(a);
+        };
+        printString.printMessage("Lets break at 12pm");
     }
 
 }
