@@ -1,7 +1,10 @@
 package day6_lecture;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -84,6 +87,46 @@ public final class App {
             System.out.println(a);
         };
         printString.printMessage("Lets break at 12pm");
+
+        List<Employee> employees = new ArrayList<Employee>();
+        employees.add(new Employee(1, "Adam", "Cheng", 50000));
+        employees.add(new Employee(2, "Mr", "Brown", 99999));
+        employees.add(new Employee(3, "Ms", "Happy", 76767));
+        employees.add(new Employee(4, "씨발", "년", 55555));
+        employees.add(new Employee(5, "Mr", "Cat", 76767));
+
+        // employees.forEach(emp-> {
+        //     System.out.println(emp);
+        // });
+
+        List <Employee> filteredEmployees = employees.stream().filter(emp->emp.getLastName().contains("Br")).collect(Collectors.toList());
+        // filteredEmployees.forEach(emp->{
+        //     System.out.println(emp);
+        // });
+
+        //------------------------------------------------------------------------------------ 
+        //sort in ascending order
+        // employees.sort(Comparator.comparing(e->e.getFirstName()));
+        // employees.sort(Comparator.comparing(Employee::getFirstName));
+
+        //reverse order
+        // employees.sort(Comparator.comparing(Employee::getFirstName).reversed());
+
+        Comparator<Employee> compare = Comparator.comparing(e->e.getFirstName());
+        Comparator<Employee> groupByComparator = Comparator.comparing(Employee::getFirstName).thenComparing(Employee::getLastName);
+
+
+        employees.sort(groupByComparator);
+        employees.forEach(emp->{
+                System.out.println(emp);
+            });
+
+
+
+
+
+        //------------------------------------------------------------------------------------ 
+
     }
 
 }
